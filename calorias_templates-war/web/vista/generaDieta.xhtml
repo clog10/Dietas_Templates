@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/gestordedatos.xhtml">
+
+            <ui:define name="top">
+                <center>
+                    <h1><h:outputText value="Genera tu Dieta con tus calorias respectivas"/></h1>
+                </center>
+            </ui:define>
+
+            <ui:define name="left">
+                <h:form>
+                    <h:commandButton value="Regresar al Inicio" action="index.xhtml"/>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <center>
+                    <!--<h:form>
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Ingresa la cantidad de calorias que necesitas consumir:" for="calorias" />
+                            <h:inputText id="calorias" title="Calorias" label="Calorias" required="true" requiredMessage="Valor obligatorio"/>
+                            <h:commandButton value="Guardar" />
+                        </h:panelGrid>
+                    </h:form>-->
+                    <h:outputText value="Racion para #{cGrupoAlimentos.kcr} KiloCalorias "/>
+                    <br/>
+                    <h:outputText value="#{cGrupoAlimentos.mensaje}"/>
+                    <f:view>
+                        <h:form>
+                            <h:dataTable value="#{cGrupoAlimentos.raciones}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.gpA.nombre}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Desayuno"/>
+                                    </f:facet>
+                                    <h:inputText value="#{item.tiempo_1}">
+                                        <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
+                                        <f:validateLongRange minimum="0" maximum="3"/>
+                                    </h:inputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Colacion"/>
+                                    </f:facet>
+                                    <h:inputText value="#{item.tiempo_2}">
+                                        <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
+                                        <f:validateLongRange minimum="0" maximum="3"/>
+                                    </h:inputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Comida"/>
+                                    </f:facet>
+                                    <h:inputText value="#{item.tiempo_3}">
+                                        <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
+                                        <f:validateLongRange minimum="0" maximum="3"/>
+                                    </h:inputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Colacion"/>
+                                    </f:facet>
+                                    <h:inputText value="#{item.tiempo_4}">
+                                        <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
+                                        <f:validateLongRange minimum="0" maximum="3"/>
+                                    </h:inputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cena"/>
+                                    </f:facet>
+                                    <h:inputText value="#{item.tiempo_5}">
+                                        <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
+                                        <f:validateLongRange minimum="0" maximum="3"/>
+                                    </h:inputText>
+                                </h:column>
+                            </h:dataTable>
+                            <br/>
+                            <h:commandButton value="Calcular Valores" actionListener="#{cGrupoAlimentos.calcular()}" />
+                            <br/>
+                            <h:outputText value="Calorias calculadas"/>
+                            <h:panelGrid columns="5" > 
+                                <h:outputText value="Desayuno: #{cGrupoAlimentos.getResultado(0)}" />
+                                <h:outputText value="Colacion Matutina:  #{cGrupoAlimentos.getResultado(1)}" />
+                                <h:outputText value="Comida: #{cGrupoAlimentos.getResultado(2)}" />
+                                <h:outputText value="Colacion Vespertina: #{cGrupoAlimentos.getResultado(3)}" />
+                                <h:outputText value="Cena: #{cGrupoAlimentos.getResultado(4)}" />
+                            </h:panelGrid>
+                            <h:outputText value="KiloCalorias Totales: #{cGrupoAlimentos.kcTotal}" />
+                            <br/>
+                            <br/>
+                            <h:outputText value="Carbohidratos calculados"/>
+                            <h:panelGrid columns="5" > 
+                                <h:outputText value="Desayuno: #{cGrupoAlimentos.getResultado2(0)}" />
+                                <h:outputText value="Colacion Matutina:  #{cGrupoAlimentos.getResultado2(1)}" />
+                                <h:outputText value="Comida: #{cGrupoAlimentos.getResultado2(2)}" />
+                                <h:outputText value="Colacion Vespertina: #{cGrupoAlimentos.getResultado2(3)}" />
+                                <h:outputText value="Cena: #{cGrupoAlimentos.getResultado2(4)}" />
+                            </h:panelGrid>
+                            <h:outputText value="Carbohidratos Totales: #{cGrupoAlimentos.chTotal}" />
+                            <br/>
+                            <br/>
+                            <h:outputText value="Proteinas calculadas"/>
+                            <h:panelGrid columns="5" > 
+                                <h:outputText value="Desayuno: #{cGrupoAlimentos.getResultado3(0)}" />
+                                <h:outputText value="Colacion Matutina:  #{cGrupoAlimentos.getResultado3(1)}" />
+                                <h:outputText value="Comida: #{cGrupoAlimentos.getResultado3(2)}" />
+                                <h:outputText value="Colacion Vespertina: #{cGrupoAlimentos.getResultado3(3)}" />
+                                <h:outputText value="Cena: #{cGrupoAlimentos.getResultado3(4)}" />
+                            </h:panelGrid>
+                            <h:outputText value="Proteinas Totales: #{cGrupoAlimentos.proTotal}" />
+                            <br/>
+                            <br/>
+                            <h:outputText value="Carbohidratos calculados"/>
+                            <h:panelGrid columns="5" > 
+                                <h:outputText value="Desayuno: #{cGrupoAlimentos.getResultado4(0)}" />
+                                <h:outputText value="Colacion Matutina:  #{cGrupoAlimentos.getResultado4(1)}" />
+                                <h:outputText value="Comida: #{cGrupoAlimentos.getResultado4(2)}" />
+                                <h:outputText value="Colacion Vespertina: #{cGrupoAlimentos.getResultado4(3)}" />
+                                <h:outputText value="Cena: #{cGrupoAlimentos.getResultado4(4)}" />
+                            </h:panelGrid>
+                            <h:outputText value="KiloCalorias Totales: #{cGrupoAlimentos.graTotal}" />
+                            <br/>
+                        </h:form>
+                    </f:view>
+                </center>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

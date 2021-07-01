@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/gestordedatos.xhtml">
+
+            <ui:define name="top">
+                <center>
+                    <h1><h:outputText value="Registrar Usuario"/></h1>
+                </center>
+            </ui:define>
+
+            <ui:define name="left">
+                <h:form>
+                    <h:commandButton value="Regresar al Inicio" action="index.xhtml"/>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <center>
+                    <f:view>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Nombre:" for="nombre" />
+                                <h:inputText id="nombre" value="#{cUsuario.usuario.nombre}" title="Nombre" label="Nombre" required="true" requiredMessage="Valor obligatorio"/>
+                                <h:outputLabel value="Sexo:" for="sexo" />
+                                <h:selectOneRadio id="sexo" value="#{cUsuario.usuario.sexo}" label="Sexo" required="true" requiredMessage="Valor obligatorio">
+                                    <f:selectItem
+                                        itemLabel="Hombre" itemValue="H"/>
+                                    <f:selectItem 
+                                        itemLabel="Mujer" itemValue="M"/>
+                                </h:selectOneRadio>  
+                                <h:outputLabel value="Usuario:" for="usuario" />
+                                <h:inputText id="usuario" value="#{cUsuario.usuario.usuario}" title="Usuario" label="Usuario" required="true" requiredMessage="Valor obligatorio"/>
+                                <h:outputLabel value="Password:" for="contrasenia" />
+                                <h:inputText id="contrasenia" value="#{cUsuario.usuario.contrasenia}" title="Contrasenia" label="Password" required="true" requiredMessage="Valor obligatorio"/>
+                                <h:outputLabel value="Fecha de nacimiento:" for="fechanacimiento" />
+                                <p:calendar value="#{cUsuario.usuario.fechanacimiento}"  required="true"> </p:calendar>
+                                <h:outputLabel value="Tipoact:" for="tipoact" />
+                                <h:selectOneMenu id="tipoact" value="#{cUsuario.tipo.idtact}" label="Tipo Actividad" required="true" requiredMessage="Valor obligatorio">
+                                    <f:selectItems value="#{cTactividad.actividades()}" var="actividad" itemLabel="#{actividad.descripcion} (#{actividad.actividades})" itemValue="#{actividad.idtact}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                            <h:commandButton value="Guardar" actionListener="#{cUsuario.registrar()}" action="listar_usuarios.xhtml"/>
+                            <p>
+                                <h:message for = "nombre" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                            <p>
+                                <h:message for = "fechanac" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                            <p>
+                                <h:message for = "fechareg" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                            <p>
+                                <h:message for = "isexo" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                            <p>
+                                <h:message for = "usuario" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                            <p>
+                                <h:message for = "password" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                            <p>
+                                <h:message for = "tipoact" showSummary="true" showDetail="false" style="color: #d20005;"></h:message>
+                            </p>
+                        </h:form>
+                    </f:view>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
