@@ -1,8 +1,11 @@
 
 package log_neg;
 
+import acceso_datos.AlimentosFacade;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Alimentos;
 
 /**
  *
@@ -11,6 +14,11 @@ import javax.ejb.LocalBean;
 @Stateless
 @LocalBean
 public class LNAlimento {
-
     
+    @EJB
+    private AlimentosFacade alimentosFacade;
+
+    public Alimentos buscar(int id){
+        return alimentosFacade.find(id);
+    }
 }

@@ -3,49 +3,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./../templates/listar.xhtml">
-
             <ui:define name="top">
                 <center>
                     <h1><h:outputText value="Lista de Actividades Registradas"/></h1>
                 </center>
             </ui:define>
-
             <ui:define name="content">
                 <center>
                     <f:view>
                         <h:form>
-                            <h:dataTable value="#{cTactividad.actividades()}" var="item">
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Idtact"/>
-                                    </f:facet>
+                            <p:dataTable id="tablaactv" value="#{cTactividad.actividades()}" var="item">
+                                <p:column headerText="Idtact">
                                     <h:outputText value="#{item.idtact}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Descripcion"/>
-                                    </f:facet>
+                                </p:column>
+                                <p:column headerText="Descripcion">
                                     <h:outputText value="#{item.descripcion}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Actividades"/>
-                                    </f:facet>
+                                </p:column>
+                                <p:column headerText="Actividades">
                                     <h:outputText value="#{item.actividades}"/>
-                                </h:column>
-                            </h:dataTable>
+                                </p:column>
+                            </p:dataTable>
+                            <p:commandButton value="Exportar a CSV" ajax="false">
+                                <p:dataExporter type="csv" target="tablaactv    " fileName="ListaActividades"/>
+                            </p:commandButton>
+                            <p:commandButton value="Exportar a pdf" ajax="false">
+                                <p:dataExporter type="pdf" target="tablaactv    " fileName="ListaActividades"/>
+                            </p:commandButton>
                             <h:commandButton value="Regresar al Inicio" action="index.xhtml"/>
                         </h:form>
                     </f:view>
                 </center>
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

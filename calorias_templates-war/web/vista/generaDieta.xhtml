@@ -7,21 +7,17 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./../templates/gestordedatos.xhtml">
-
             <ui:define name="top">
                 <center>
                     <h1><h:outputText value="Genera tu Dieta con tus calorias respectivas"/></h1>
                 </center>
             </ui:define>
-
             <ui:define name="left">
                 <h:form>
                     <h:commandButton value="Regresar al Inicio" action="index.xhtml"/>
                 </h:form>
             </ui:define>
-
             <ui:define name="content">
                 <center>
                     <!--<h:form>
@@ -36,61 +32,58 @@
                     <h:outputText value="#{cGrupoAlimentos.mensaje}"/>
                     <f:view>
                         <h:form>
-                            <h:dataTable value="#{cGrupoAlimentos.raciones}" var="item">
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
+                            <p:dataTable value="#{cGrupoAlimentos.raciones}" var="item">
+                                <p:column headerText="Nombre">
                                     <h:outputText value="#{item.gpA.nombre}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Desayuno"/>
-                                    </f:facet>
-                                    <h:inputText value="#{item.tiempo_1}">
+                                </p:column>
+                                <p:column headerText="Desayuno">
+                                    <h:inputText value="#{item.tiempo_1}" size="2">
                                         <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
                                         <f:validateLongRange minimum="0" maximum="3"/>
                                     </h:inputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Colacion"/>
-                                    </f:facet>
-                                    <h:inputText value="#{item.tiempo_2}">
+                                    <h:selectOneMenu id="alimento1" value="#{cGrupoAlimentos.idAlimentoTiempo1}" title="Alimento1" class="combo">
+                                        <f:selectItems var="alimento" itemValue="#{alimento.idalimento}" value="#{cGrupoAlimentos.listar(item.gpA.idgrupo)}" itemLabel="#{alimento.nombre}"/>
+                                    </h:selectOneMenu>
+                                </p:column>
+                                <p:column headerText="Colacion">
+                                    <h:inputText value="#{item.tiempo_2}" size="2">
                                         <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
                                         <f:validateLongRange minimum="0" maximum="3"/>
                                     </h:inputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Comida"/>
-                                    </f:facet>
-                                    <h:inputText value="#{item.tiempo_3}">
+                                    <h:selectOneMenu id="alimento2" value="#{cGrupoAlimentos.idAlimentoTiempo2}" title="Alimento2" class="combo">
+                                        <f:selectItems var="alimento" itemValue="#{alimento.idalimento}"  value="#{cGrupoAlimentos.listar(item.gpA.idgrupo)}" itemLabel="#{alimento.nombre}" />
+                                    </h:selectOneMenu>
+                                </p:column>
+                                <p:column headerText="Comida">
+                                    <h:inputText value="#{item.tiempo_3}" size="2">
                                         <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
                                         <f:validateLongRange minimum="0" maximum="3"/>
                                     </h:inputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Colacion"/>
-                                    </f:facet>
-                                    <h:inputText value="#{item.tiempo_4}">
+                                    <h:selectOneMenu id="alimento3" value="#{cGrupoAlimentos.idAlimentoTiempo3}" title="Alimento3" class="combo">
+                                        <f:selectItems var="alimento" itemValue="#{alimento.idalimento}" value="#{cGrupoAlimentos.listar(item.gpA.idgrupo)}" itemLabel="#{alimento.nombre}" />
+                                    </h:selectOneMenu>  
+                                </p:column>
+                                <p:column headerText="Colacion">
+                                    <h:inputText value="#{item.tiempo_4}" size="2">
                                         <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
                                         <f:validateLongRange minimum="0" maximum="3"/>
                                     </h:inputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Cena"/>
-                                    </f:facet>
-                                    <h:inputText value="#{item.tiempo_5}">
+                                    <h:selectOneMenu id="alimento4" value="#{cGrupoAlimentos.idAlimentoTiempo4}" title="Alimento4" class="combo">
+                                        <f:selectItems var="alimento" itemValue="#{alimento.idalimento}" value="#{cGrupoAlimentos.listar(item.gpA.idgrupo)}" itemLabel="#{alimento.nombre}" />
+                                    </h:selectOneMenu>  
+                                </p:column>
+                                <p:column headerText="Cena">
+                                    <h:inputText value="#{item.tiempo_5}" size="2">
                                         <f:convertNumber minIntegerDigits="0" maxIntegerDigits="3"/>
                                         <f:validateLongRange minimum="0" maximum="3"/>
                                     </h:inputText>
-                                </h:column>
-                            </h:dataTable>
+                                    <h:selectOneMenu id="alimento5" value="#{cGrupoAlimentos.idAlimentoTiempo5}" title="Alimento5" class="combo">
+                                        <f:selectItems var="alimento" itemValue="#{alimento.idalimento}" value="#{cGrupoAlimentos.listar(item.gpA.idgrupo)}" itemLabel="#{alimento.nombre}" />
+                                    </h:selectOneMenu>  
+                                </p:column>
+                            </p:dataTable>
                             <br/>
-                            <h:commandButton value="Calcular Valores" actionListener="#{cGrupoAlimentos.calcular()}" />
+                            <h:commandButton value="Calcular Valores" actionListener="#{cGrupoAlimentos.calcular()}"/>
                             <br/>
                             <h:outputText value="Calorias calculadas"/>
                             <h:panelGrid columns="5" > 
@@ -133,7 +126,7 @@
                                 <h:outputText value="Colacion Vespertina: #{cGrupoAlimentos.getResultado4(3)}" />
                                 <h:outputText value="Cena: #{cGrupoAlimentos.getResultado4(4)}" />
                             </h:panelGrid>
-                            <h:outputText value="KiloCalorias Totales: #{cGrupoAlimentos.graTotal}" />
+                            <h:outputText value="Carbohidratos Totales: #{cGrupoAlimentos.graTotal}" />
                             <br/>
                         </h:form>
                     </f:view>

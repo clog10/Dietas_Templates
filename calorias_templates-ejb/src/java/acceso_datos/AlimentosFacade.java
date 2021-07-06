@@ -5,9 +5,11 @@
  */
 package acceso_datos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modelo.Alimentos;
 
 /**
@@ -28,5 +30,11 @@ public class AlimentosFacade extends AbstractFacade<Alimentos> {
     public AlimentosFacade() {
         super(Alimentos.class);
     }
-    
+
+    public List<Alimentos> obtener(int id) {
+        Query q = em.createNativeQuery("SELECT * FROM CARLOS.Alimentos WHERE Alimentos.GRUPOALIMENTOS = " + id, Alimentos.class);
+        List<Alimentos> lst = q.getResultList();
+        return lst;
+    }
+
 }
